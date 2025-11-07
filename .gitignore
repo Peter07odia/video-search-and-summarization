@@ -1,0 +1,58 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.*.local
+*.env
+
+# Data files
+waitlist_submissions.json
+waitlist_submissions.csv
+*.db
+*.sqlite
+*.sqlite3
+
+# Vercel
+.vercel
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
