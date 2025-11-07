@@ -1,0 +1,25 @@
+{
+  "buildCommand": "cd landing-page && echo 'Build complete'",
+  "outputDirectory": "landing-page",
+  "installCommand": "cd landing-page && pip install -r requirements-vercel.txt",
+  "builds": [
+    {
+      "src": "landing-page/api/index.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "landing-page/api/index.py"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "landing-page/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "landing-page/index.html"
+    }
+  ]
+}
