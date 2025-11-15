@@ -18,6 +18,9 @@ import gradio as gr
 
 from utils import MediaFileInfo, StreamSettingsCache
 
+# Column names for alerts table
+column_names = ["Alert Name", "Event(s) [comma separated]", "", ""]
+
 
 def get_live_stream_preview_chunks(ls_id):
     if not ls_id:
@@ -172,7 +175,7 @@ class RetrieveCache:
 
         if not id_settings:
             self.logger.debug(f"No stream settings found for {video_id}.")
-            return [gr.update(interactive=True)] * 30 + [gr.update(value=[[""] * 4] * 10)] + [[[]]]
+            return [gr.update(interactive=True)] * 30 + [gr.update(value=[[""] * 4] * 10, headers=column_names)] + [[[]]]
             # other components              # alerts_table              # table_state
 
         # Process table data
@@ -257,8 +260,8 @@ class RetrieveCache:
                 value=id_settings.get("enable_audio", False), interactive=True
             ),  # enable_audio
             gr.update(
-                value=table_data, interactive=True
-            ),  # alerts_table (TODO: headers/column names)
+                value=table_data, interactive=True, headers=column_names
+            ),  # alerts_table
             [table_state],  # table_state
         ]
 
