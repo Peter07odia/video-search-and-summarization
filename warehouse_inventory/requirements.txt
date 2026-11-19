@@ -1,0 +1,5 @@
+opencv-python-headless>=4.8
+zxing-cpp>=2.2
+PyYAML>=6.0
+requests>=2.31
+pytest>=8.0

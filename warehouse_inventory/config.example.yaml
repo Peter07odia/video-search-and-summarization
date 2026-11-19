@@ -1,0 +1,43 @@
+# Copy to config.yaml and edit. Anything omitted falls back to defaults in warehouse_inventory/config.py.
+
+wms:
+  csv: wms_export.csv
+  columns:            # our field -> your WMS CSV header. null if your export doesn't have it.
+    location: Location
+    lpn: LPN          # pallet license plate (e.g. 7700593756). One row per pallet = best case.
+    sku: Item
+    pallets: null     # set this instead if the export is one row per location with a pallet qty
+    units: null
+    units_per_pallet: null
+    gtin: null
+  # If WMS locations are finer than one video (e.g. per position), capture the lane with group 1.
+  lane_regex: null    # H-033-0054-10 is already lane+level, so no regex needed
+
+videos:
+  dir: videos         # one clip per lane-level, named by location: H-033-0054-10.mp4
+
+output_dir: out
+
+labels:
+  sample_fps: 4
+  patterns:
+    location: '[A-Z]-\d{3}-\d{4}-\d{2}'   # upright location labels
+    lpn: '\d{10}'                          # pallet LPN labels
+
+vss:
+  url: http://localhost:8100
+  model: null               # null = first model from GET /models
+  chunk_duration: 10
+  enable_cv: true
+  cv_prompt: "pallet;0.4"   # Grounding DINO prompt;threshold
+  cv_json_dir: out/cv       # where you copy <request_id>_fused.json from the VSS container
+
+counting:
+  object_types: [pallet]
+  min_track_frames: 6
+  min_confidence: 0.35
+
+reconcile:
+  count_tolerance: 0
+  cross_check_tolerance: 1
+  compare_sku_via: none
